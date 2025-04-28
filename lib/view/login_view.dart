@@ -117,25 +117,25 @@ class LoginView extends StatelessWidget {
                                     style: TextStyle(color: Colors.black),
                                   ),
                                 ),
-                                const SizedBox(width: 16),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Get.to(() => const SignUpView());
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: ChatColor.almond,
-                                  ),
-                                  child: const Text(
-                                    'Sign Up',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
+                                // const SizedBox(width: 16),
+                                // ElevatedButton(
+                                //   onPressed: () {
+                                //     Get.to(() => const SignUpView());
+                                //   },
+                                //   style: ElevatedButton.styleFrom(
+                                //     backgroundColor: ChatColor.almond,
+                                //   ),
+                                //   child: const Text(
+                                //     'Sign Up',
+                                //     textAlign: TextAlign.center,
+                                //     style: TextStyle(color: Colors.black),
+                                //   ),
+                                // ),
                               ],
                             ),
-                            const SizedBox(height: 64),
-                            _textOrContinueWith(),
-                            const SizedBox(height: 32),
+                            // const SizedBox(height: 64),
+                            // _textOrContinueWith(),
+                            // const SizedBox(height: 32),
                             // Row(
                             //   mainAxisAlignment: MainAxisAlignment.center,
                             //   children: [
@@ -150,80 +150,80 @@ class LoginView extends StatelessWidget {
                             //     ),
                             //   ],
                             // ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    // Get.to(() => SignUpScreen());
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF3B2063),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10,
-                                        bottom: 10,
-                                        left: 30,
-                                        right: 30),
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          ImageAssest.logoGG,
-                                          height: 24,
-                                          width: 24,
-                                        ),
-                                        const SizedBox(
-                                          width: 4,
-                                        ),
-                                        Text(
-                                          'Google',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: ChatColor.gray7,
-                                              fontSize: 15.04,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF3B2063),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10,
-                                        bottom: 10,
-                                        left: 30,
-                                        right: 30),
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          ImageAssest.logoFB,
-                                          height: 20,
-                                          width: 20,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          'Facebook',
-                                          textAlign: TextAlign.center,
-                                          style:
-                                              TextStyle(color: ChatColor.gray7),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     ElevatedButton(
+                            //       onPressed: () {
+                            //         // Get.to(() => SignUpScreen());
+                            //       },
+                            //       style: ElevatedButton.styleFrom(
+                            //         backgroundColor: const Color(0xFF3B2063),
+                            //       ),
+                            //       child: Padding(
+                            //         padding: const EdgeInsets.only(
+                            //             top: 10,
+                            //             bottom: 10,
+                            //             left: 30,
+                            //             right: 30),
+                            //         child: Row(
+                            //           children: [
+                            //             Image.asset(
+                            //               ImageAssest.logoGG,
+                            //               height: 24,
+                            //               width: 24,
+                            //             ),
+                            //             const SizedBox(
+                            //               width: 4,
+                            //             ),
+                            //             Text(
+                            //               'Google',
+                            //               textAlign: TextAlign.center,
+                            //               style: TextStyle(
+                            //                   color: ChatColor.gray7,
+                            //                   fontSize: 15.04,
+                            //                   fontWeight: FontWeight.bold),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 20,
+                            //     ),
+                            //     ElevatedButton(
+                            //       onPressed: () {},
+                            //       style: ElevatedButton.styleFrom(
+                            //         backgroundColor: const Color(0xFF3B2063),
+                            //       ),
+                            //       child: Padding(
+                            //         padding: const EdgeInsets.only(
+                            //             top: 10,
+                            //             bottom: 10,
+                            //             left: 30,
+                            //             right: 30),
+                            //         child: Row(
+                            //           children: [
+                            //             Image.asset(
+                            //               ImageAssest.logoFB,
+                            //               height: 20,
+                            //               width: 20,
+                            //             ),
+                            //             const SizedBox(
+                            //               width: 5,
+                            //             ),
+                            //             Text(
+                            //               'Facebook',
+                            //               textAlign: TextAlign.center,
+                            //               style:
+                            //                   TextStyle(color: ChatColor.gray7),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // )
                           ],
                         ),
                       ),

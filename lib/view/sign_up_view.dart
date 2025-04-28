@@ -64,7 +64,7 @@ class SignUpView extends StatelessWidget {
                               height: 50,
                             ),
                             Text(
-                              'SIGN IN',
+                              'SIGN UP',
                               style: TextStyle(
                                 fontSize: 78,
                                 fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ class SignUpView extends StatelessWidget {
                                         Get.snackbar(
                                           'Success',
                                           'Đăng ký thành công',
-                                          snackPosition: SnackPosition.BOTTOM,
+                                          snackPosition: SnackPosition.TOP,
                                         );
 
                                         // Reset form state if needed

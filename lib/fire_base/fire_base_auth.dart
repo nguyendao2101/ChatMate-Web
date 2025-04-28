@@ -57,56 +57,98 @@ class FirAuth {
       }
     });
   }
-
+  /// Đăng nhập tài khoản
   static Future<void> signInWithEmailAndPassword(
-      String email, String passWord) async {
+      String email,
+      String passWord,
+      ) async {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: passWord);
+
       if (credential.user != null) {
-        Get.offAll(() => const HomeView());
+        final userSnapshot = await FirebaseDatabase.instance
+            .ref('users/${credential.user!.uid}')
+            .once();
+
+        final userData = userSnapshot.snapshot.value as Map<dynamic, dynamic>?;
+
+        if (userData != null) {
+          final userRole = userData['role'] ?? 'user';
+          print('User Role: $userRole');
+
+          if (userRole == 'admin') {
+            Get.offAll(() => const HomeView());
+          } else {
+            _showErrorDialog("Tài khoản không được cấp quyền truy cập.");
+          }
+        } else {
+          print('Không tìm thấy dữ liệu người dùng.');
+        }
       }
     } on FirebaseAuthException catch (err) {
-      if (err.code == 'user-not-found') {
-        Get.dialog(AlertDialog(
-          title: const Text('Error'),
-          content: const Text('No user found for that email'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('OK'),
-            )
-          ],
-        ));
-      } else if (err.code == 'wrong-password') {
-        Get.dialog(AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Wrong password provided for that user'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('OK'))
-          ],
-        ));
-      } else {
-        Get.dialog(AlertDialog(
-          title: const Text('Error'),
-          content: Text(err.message ?? "Something went wrong..."),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('OK'))
-          ],
-        ));
+      switch (err.code) {
+        case 'user-not-found':
+          _showErrorDialog("Không tìm thấy tài khoản.");
+          break;
+        case 'wrong-password':
+          _showErrorDialog("Mật khẩu không đúng.");
+          break;
+        default:
+          _showErrorDialog(err.message ?? "Đã xảy ra lỗi.");
       }
     }
   }
+
+  // static Future<void> signInWithEmailAndPassword(
+  //     String email, String passWord) async {
+  //   try {
+  //     final credential = await FirebaseAuth.instance
+  //         .signInWithEmailAndPassword(email: email, password: passWord);
+  //     if (credential.user != null) {
+  //       Get.offAll(() => const HomeView());
+  //     }
+  //   } on FirebaseAuthException catch (err) {
+  //     if (err.code == 'user-not-found') {
+  //       Get.dialog(AlertDialog(
+  //         title: const Text('Error'),
+  //         content: const Text('No user found for that email'),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Get.back();
+  //             },
+  //             child: const Text('OK'),
+  //           )
+  //         ],
+  //       ));
+  //     } else if (err.code == 'wrong-password') {
+  //       Get.dialog(AlertDialog(
+  //         title: const Text('Error'),
+  //         content: const Text('Wrong password provided for that user'),
+  //         actions: [
+  //           TextButton(
+  //               onPressed: () {
+  //                 Get.back();
+  //               },
+  //               child: const Text('OK'))
+  //         ],
+  //       ));
+  //     } else {
+  //       Get.dialog(AlertDialog(
+  //         title: const Text('Error'),
+  //         content: Text(err.message ?? "Something went wrong..."),
+  //         actions: [
+  //           TextButton(
+  //               onPressed: () {
+  //                 Get.back();
+  //               },
+  //               child: const Text('OK'))
+  //         ],
+  //       ));
+  //     }
+  //   }
+  // }
 
   void _createUser(String userId, String hoTen, String addRess, String sex,
       Function onSuccess) {
@@ -141,5 +183,19 @@ class FirAuth {
 
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
+  }
+  static void _showErrorDialog(String message) {
+    Get.dialog(
+      AlertDialog(
+        title: const Text('Lỗi'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 }
