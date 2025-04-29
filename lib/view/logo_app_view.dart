@@ -81,7 +81,7 @@ class _LogoAppViewState extends State<LogoAppView> {
                   width: 10,
                 ),
                 Text(
-                  'Loading...',
+                  'Đang tải...',
                   style: TextStyle(
                       color: ChatColor.almond,
                       fontSize: 56,

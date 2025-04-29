@@ -46,7 +46,7 @@ class LoginView extends StatelessWidget {
                         ),
                         // Chữ ở góc dưới cùng bên trái
                         Text(
-                          'Hi welcom back', // Thay đổi thành nội dung bạn muốn hiển thị
+                          'Chào mừng trở lại', // Thay đổi thành nội dung bạn muốn hiển thị
                           style: TextStyle(
                               color: ChatColor
                                   .almond, // Màu chữ, bạn có thể thay đổi theo nhu cầu
@@ -69,8 +69,9 @@ class LoginView extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              'SIGN IN',
+                              'ĐĂNG NHẬP',
                               style: TextStyle(
+                                fontFamily: 'Roboto',
                                 fontSize: 78,
                                 fontWeight: FontWeight.bold,
                                 color: ChatColor.almond,
@@ -87,7 +88,7 @@ class LoginView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    'Forgot password?',
+                                    'Quên mật khẩu',
                                     style: TextStyle(
                                       fontSize: 10,
                                       color: ChatColor.almond2,
@@ -112,7 +113,7 @@ class LoginView extends StatelessWidget {
                                     backgroundColor: ChatColor.almond,
                                   ),
                                   child: const Text(
-                                    'Sign In',
+                                    'Đăng Nhập',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(color: Colors.black),
                                   ),
@@ -277,7 +278,7 @@ class LoginView extends StatelessWidget {
           style: const TextStyle(
               color: Colors.white), // Text color to white for better visibility
           decoration: InputDecoration(
-            labelText: 'Password',
+            labelText: 'Mật khẩu',
             labelStyle: TextStyle(
                 color: Colors.white
                     .withOpacity(0.8)), // Slightly transparent label
@@ -306,7 +307,7 @@ class LoginView extends StatelessWidget {
             // filled: true,
             // fillColor: Color.fromARGB(255, 50, 50, 50)
             //     .withOpacity(0.8), // Slightly transparent dark background
-            hintText: 'Password',
+            hintText: 'Mật khẩu',
             hintStyle: TextStyle(
                 color: Colors.white
                     .withOpacity(0.6)), // Slightly transparent hint text

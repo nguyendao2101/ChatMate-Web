@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chatmate_web/view/chat_view.dart';
+import 'package:flutter_chatmate_web/view/login_view.dart';
 import 'package:flutter_chatmate_web/view_model/home_view_model.dart';
 import 'package:flutter_chatmate_web/widgets/common/color_extention.dart';
 import 'package:flutter_chatmate_web/widgets/common/image_extention.dart';
 import 'package:get/get.dart';
 
+import '../view_model/get_data_view_model.dart';
 import 'data_export_pdf.dart';
 
 class HomeView extends StatefulWidget {
@@ -20,6 +22,8 @@ class _HomeViewState extends State<HomeView>
   Widget build(BuildContext context) {
     final controller = Get.put(HomeViewModel());
     var media = MediaQuery.sizeOf(context);
+    final controllerGetData = Get.put(GetDataViewModel());
+
 
     return Scaffold(
       key: controller.scaffoldKey,
@@ -44,7 +48,7 @@ class _HomeViewState extends State<HomeView>
                       height: 16,
                     ),
                     Text(
-                      'History Chat',
+                      'Lịch Sử Trò Chuyện',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -75,29 +79,44 @@ class _HomeViewState extends State<HomeView>
           Padding(
             padding: const EdgeInsets.only(right: 16, top: 16),
             child: PopupMenuButton<int>(
-                color: ChatColor.gray1,
-                offset: const Offset(-10, 15),
-                elevation: 1,
-                icon: Image.asset(
-                  ImageAssest.users,
-                  width: 64,
-                  height: 64,
-                ),
-                padding: EdgeInsets.zero,
-                onSelected: (selectIndex) {},
-                itemBuilder: (context) {
-                  return [
-                    PopupMenuItem(
-                      value: 1,
-                      height: 30,
-                      child: Text(
-                        "Log Out",
-                        style:
-                            TextStyle(fontSize: 12, color: ChatColor.lightGray),
-                      ),
+              color: ChatColor.gray1,
+              offset: const Offset(-10, 15),
+              elevation: 1,
+              icon: Image.asset(
+                ImageAssest.users,
+                width: 64,
+                height: 64,
+              ),
+              padding: EdgeInsets.zero,
+              onSelected: (selectedIndex) {
+                if (selectedIndex == 1) {
+                  Get.offAll(const LoginView());
+                } else if (selectedIndex == 2) {
+                  controllerGetData.exportToPDF(context);
+                }
+              },
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    value: 1,
+                    height: 30,
+                    child: Text(
+                      "Đăng Xuất",
+                      style: TextStyle(fontSize: 12, color: ChatColor.lightGray),
                     ),
-                  ];
-                }),
+                  ),
+                  if(controller.userRole.value.toString() == 'admin')
+                  PopupMenuItem(
+                    value: 2,
+                    height: 30,
+                    child: Text(
+                      "Xuất PDF",
+                      style: TextStyle(fontSize: 12, color: ChatColor.lightGray),
+                    ),
+                  ),
+                ];
+              },
+            ),
           ),
         ],
       ),
@@ -105,7 +124,7 @@ class _HomeViewState extends State<HomeView>
         children: [
           Expanded(flex: 1, child: Container()),
           const Expanded(flex: 1, child: ChatScreen()),
-          const Expanded(flex: 1, child: DataExportPdf()),
+          Expanded(flex: 1, child: Container()),
         ],
       ),
     );

@@ -176,7 +176,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Chat',
+              'Trò chuyện',
               style: TextStyle(
                   fontSize: 24, height: 1.75, color: ChatColor.almond),
             ),

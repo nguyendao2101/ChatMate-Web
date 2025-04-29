@@ -15,25 +15,25 @@ class _DataExportPdfState extends State<DataExportPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // if (controller.formKey.currentState
-            //     ?.validate() ==
-            //     true) {
-            //   controller.onlogin();
-            // }
-            controller.exportToPDF(context);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ChatColor.almond,
+      backgroundColor: ChatColor.background,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 20,),
+          ElevatedButton(
+            onPressed: () {
+              controller.exportToPDF(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ChatColor.almond,
+            ),
+            child: const Text(
+              'Xuất PDF',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black),
+            ),
           ),
-          child: const Text(
-            'Export PDF',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
+        ],
       ),
     );
   }

@@ -77,7 +77,7 @@ class FirAuth {
           final userRole = userData['role'] ?? 'user';
           print('User Role: $userRole');
 
-          if (userRole == 'admin') {
+          if (userRole != '') {
             Get.offAll(() => const HomeView());
           } else {
             _showErrorDialog("Tài khoản không được cấp quyền truy cập.");

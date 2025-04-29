@@ -39,6 +39,7 @@ class GetDataViewModel extends GetxController {
     fetchAllData();
   }
 
+
   void fetchAllData() async {
     DatabaseReference usersRef = _dbRef.child("users");
 
@@ -107,6 +108,7 @@ class GetDataViewModel extends GetxController {
     return sorted.take(10).toList();
   }
 
+
   void exportToPDF(BuildContext context) async {
     final pdf = pw.Document();
 
@@ -129,7 +131,7 @@ class GetDataViewModel extends GetxController {
 
       // Chuẩn bị dữ liệu bảng cho Top 10 tin nhắn yêu thích
       final List<List<String>> favouriteData = [
-        ['Tin nhắn yêu thích', 'Lượt thích'], // headers
+        ['Tin nhắn yêu thích'], // headers
         ...top10Favourites.map((item) => [item.key, item.value.toString()]),
       ];
 
@@ -157,7 +159,7 @@ class GetDataViewModel extends GetxController {
                   if (pageIndex == 0) pw.SizedBox(height: 20),
                   if (pageIndex == 0)
                     pw.Text(
-                      'THỐNG KÊ CHATBOT 2024',
+                      'THỐNG KÊ CHATBOT',
                       style: pw.TextStyle(
                         font: ttf,
                         fontSize: 20,
@@ -166,7 +168,7 @@ class GetDataViewModel extends GetxController {
                     ),
                   if (pageIndex == 0) pw.SizedBox(height: 20),
                   pw.Text(
-                    'Top 10 Câu Hỏi Phổ Biến (Trang ${pageIndex + 1})',
+                    'Top 10 Câu Hỏi Phổ Biến',
                     style: pw.TextStyle(
                       font: ttf,
                       fontSize: 14,
@@ -205,7 +207,7 @@ class GetDataViewModel extends GetxController {
                   if (pageIndex == 0) pw.Image(image2, height: 80), // Chỉ hiển thị logo ở trang đầu
                   pw.SizedBox(height: 20),
                   pw.Text(
-                    'Top 10 Tin Nhắn Yêu Thích (Trang ${pageIndex + 1})',
+                    'Top 10 Tin Nhắn Yêu Thích',
                     style: pw.TextStyle(
                       font: ttf,
                       fontSize: 14,
