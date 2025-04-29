@@ -42,7 +42,7 @@ class SignUpView extends StatelessWidget {
                       ),
                       // Chữ ở góc dưới cùng bên trái
                       Text(
-                        'Create Account', // Thay đổi thành nội dung bạn muốn hiển thị
+                        'Tạo tài khoản', // Thay đổi thành nội dung bạn muốn hiển thị
                         style: TextStyle(
                             color: ChatColor
                                 .almond, // Màu chữ, bạn có thể thay đổi theo nhu cầu
@@ -64,7 +64,7 @@ class SignUpView extends StatelessWidget {
                               height: 50,
                             ),
                             Text(
-                              'SIGN UP',
+                              'ĐĂNG KÝ',
                               style: TextStyle(
                                 fontSize: 78,
                                 fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class SignUpView extends StatelessWidget {
                                       .center, // Căn giữa chữ "Sign Up"
                                   children: [
                                     Text(
-                                      'Sign Up',
+                                      'Đăng Ký',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.black,
@@ -214,7 +214,7 @@ class SignUpView extends StatelessWidget {
           style: const TextStyle(
               color: Colors.white), // Text color to white for better visibility
           decoration: InputDecoration(
-            labelText: 'Password',
+            labelText: 'Mật khẩu',
             labelStyle: TextStyle(
                 color: Colors.white
                     .withOpacity(0.8)), // Slightly transparent label
@@ -243,7 +243,7 @@ class SignUpView extends StatelessWidget {
             // filled: true,
             // fillColor: Color.fromARGB(255, 50, 50, 50)
             //     .withOpacity(0.8), // Slightly transparent dark background
-            hintText: 'Password',
+            hintText: 'Mật khẩu',
             hintStyle: TextStyle(
                 color: Colors.white
                     .withOpacity(0.6)), // Slightly transparent hint text
@@ -274,7 +274,7 @@ class SignUpView extends StatelessWidget {
           style: const TextStyle(
               color: Colors.white), // Text color to white for better visibility
           decoration: InputDecoration(
-            labelText: 'Password',
+            labelText: 'Nhập Lại Mật Khẩu',
             labelStyle: TextStyle(
                 color: Colors.white
                     .withOpacity(0.8)), // Slightly transparent label
@@ -303,7 +303,7 @@ class SignUpView extends StatelessWidget {
             // filled: true,
             // fillColor: Color.fromARGB(255, 50, 50, 50)
             //     .withOpacity(0.8), // Slightly transparent dark background
-            hintText: 'Password',
+            hintText: 'Nhập Lại Mật Khẩu',
             hintStyle: TextStyle(
                 color: Colors.white
                     .withOpacity(0.6)), // Slightly transparent hint text
@@ -333,7 +333,7 @@ class SignUpView extends StatelessWidget {
         style: const TextStyle(
             color: Colors.white), // Text color to white for better visibility
         decoration: InputDecoration(
-          labelText: 'Full Name',
+          labelText: 'Họ Và Tên',
           labelStyle: TextStyle(
               color:
                   Colors.white.withOpacity(0.8)), // Slightly transparent label
@@ -362,7 +362,7 @@ class SignUpView extends StatelessWidget {
           // filled: true,
           // fillColor: Color.fromARGB(255, 50, 50, 50)
           //     .withOpacity(0.8), // Slightly transparent dark background
-          hintText: 'Full Name',
+          hintText: 'Họ Và Tên',
           hintStyle: TextStyle(
               color: Colors.white
                   .withOpacity(0.6)), // Slightly transparent hint text
@@ -381,7 +381,7 @@ class SignUpView extends StatelessWidget {
         style: const TextStyle(
             color: Colors.white), // Text color to white for better visibility
         decoration: InputDecoration(
-          labelText: 'Address',
+          labelText: 'Địa Chỉ',
           labelStyle: TextStyle(
               color:
                   Colors.white.withOpacity(0.8)), // Slightly transparent label
@@ -410,7 +410,7 @@ class SignUpView extends StatelessWidget {
           // filled: true,
           // fillColor: Color.fromARGB(255, 50, 50, 50)
           //     .withOpacity(0.8), // Slightly transparent dark background
-          hintText: 'Address',
+          hintText: 'Địa Chỉ',
           hintStyle: TextStyle(
               color: Colors.white
                   .withOpacity(0.6)), // Slightly transparent hint text
@@ -429,7 +429,7 @@ class SignUpView extends StatelessWidget {
         style: const TextStyle(
             color: Colors.white), // Text color to white for better visibility
         decoration: InputDecoration(
-          labelText: 'Sex',
+          labelText: 'Giới Tính',
           labelStyle: TextStyle(
               color:
                   Colors.white.withOpacity(0.8)), // Slightly transparent label
@@ -458,7 +458,7 @@ class SignUpView extends StatelessWidget {
           // filled: true,
           // fillColor: Color.fromARGB(255, 50, 50, 50)
           //     .withOpacity(0.8), // Slightly transparent dark background
-          hintText: 'Sex',
+          hintText: 'Giới Tính',
           hintStyle: TextStyle(
               color: Colors.white
                   .withOpacity(0.6)), // Slightly transparent hint text
