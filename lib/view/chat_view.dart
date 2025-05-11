@@ -71,9 +71,9 @@ class _ChatScreenState extends State<ChatScreen> {
     _scrollToBottom();
 
     try {
-      AuthGoogle authGoogle =
-          await AuthGoogle(fileJson: "assets/testchatbot-epwa-46be8e97c02b.json")
-              .build();
+      AuthGoogle authGoogle = await AuthGoogle(
+              fileJson: "assets/testchatbot-epwa-46be8e97c02b.json")
+          .build();
       DialogFlow dialogFlow =
           DialogFlow(authGoogle: authGoogle, language: Language.english);
 
@@ -333,6 +333,11 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 child: TextField(
                   controller: _controller,
+                  onSubmitted: (value) {
+                    if (value.isNotEmpty) {
+                      _sendMessage(); // Gửi tin nhắn khi nhấn Enter
+                    }
+                  },
                   decoration: InputDecoration(
                     hintText: "Nhập tin nhắn...",
                     hintStyle: TextStyle(color: ChatColor.lightGray),

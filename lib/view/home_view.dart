@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chatmate_web/view/chat_view.dart';
 import 'package:flutter_chatmate_web/view/login_view.dart';
+import 'package:flutter_chatmate_web/view/user_view.dart';
 import 'package:flutter_chatmate_web/view_model/home_view_model.dart';
 import 'package:flutter_chatmate_web/widgets/common/color_extention.dart';
 import 'package:flutter_chatmate_web/widgets/common/image_extention.dart';
@@ -24,14 +27,12 @@ class _HomeViewState extends State<HomeView>
     var media = MediaQuery.sizeOf(context);
     final controllerGetData = Get.put(GetDataViewModel());
 
-
     return Scaffold(
       key: controller.scaffoldKey,
       backgroundColor: ChatColor.background,
       drawer: Drawer(
         backgroundColor: ChatColor.background,
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: [
             SizedBox(
               height: 230,
@@ -54,11 +55,63 @@ class _HomeViewState extends State<HomeView>
                         fontWeight: FontWeight.bold,
                         color: ChatColor.almond,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
-            )
+            ),
+            Expanded(
+              child: FutureBuilder<DataSnapshot>(
+                future: FirebaseDatabase.instance
+                    .ref(
+                        'users/${FirebaseAuth.instance.currentUser?.uid}/historyChat')
+                    .get(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        'Lỗi khi tải dữ liệu!',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    );
+                  }
+                  if (!snapshot.hasData || snapshot.data!.value == null) {
+                    return Center(
+                      child: Text(
+                        'Không có lịch sử trò chuyện.',
+                        style: TextStyle(color: ChatColor.gray4),
+                      ),
+                    );
+                  }
+
+                  final historyChat =
+                      snapshot.data!.value as Map<dynamic, dynamic>;
+                  return ListView.builder(
+                    itemCount: historyChat.length,
+                    itemBuilder: (context, index) {
+                      final key = historyChat.keys.elementAt(index);
+                      final chatEntry = historyChat[key];
+                      return ListTile(
+                        title: Text(
+                          chatEntry['userMessage'] ?? 'Tin nhắn không xác định',
+                          style: TextStyle(color: ChatColor.gray4),
+                        ),
+                        subtitle: Text(
+                          chatEntry['date'] ?? '',
+                          style: TextStyle(color: ChatColor.lightGray),
+                        ),
+                        onTap: () {
+                          // Xử lý khi nhấn vào một mục lịch sử
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -93,25 +146,38 @@ class _HomeViewState extends State<HomeView>
                   Get.offAll(const LoginView());
                 } else if (selectedIndex == 2) {
                   controllerGetData.exportToPDF(context);
+                } else {
+                  Get.to(() => const UserView());
                 }
               },
               itemBuilder: (context) {
                 return [
+                  if (controller.userRole.value.toString() == 'admin')
+                    PopupMenuItem(
+                      value: 2,
+                      height: 30,
+                      child: Text(
+                        "Xuất PDF",
+                        style:
+                            TextStyle(fontSize: 12, color: ChatColor.lightGray),
+                      ),
+                    ),
+                  PopupMenuItem(
+                    value: 3,
+                    height: 30,
+                    child: Text(
+                      "Thông tin tài khoản",
+                      style:
+                      TextStyle(fontSize: 12, color: ChatColor.lightGray),
+                    ),
+                  ),
                   PopupMenuItem(
                     value: 1,
                     height: 30,
                     child: Text(
                       "Đăng Xuất",
-                      style: TextStyle(fontSize: 12, color: ChatColor.lightGray),
-                    ),
-                  ),
-                  if(controller.userRole.value.toString() == 'admin')
-                  PopupMenuItem(
-                    value: 2,
-                    height: 30,
-                    child: Text(
-                      "Xuất PDF",
-                      style: TextStyle(fontSize: 12, color: ChatColor.lightGray),
+                      style:
+                      TextStyle(fontSize: 12, color: ChatColor.lightGray),
                     ),
                   ),
                 ];

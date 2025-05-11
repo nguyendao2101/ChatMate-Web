@@ -39,7 +39,6 @@ class GetDataViewModel extends GetxController {
     fetchAllData();
   }
 
-
   void fetchAllData() async {
     DatabaseReference usersRef = _dbRef.child("users");
 
@@ -108,7 +107,6 @@ class GetDataViewModel extends GetxController {
     return sorted.take(10).toList();
   }
 
-
   void exportToPDF(BuildContext context) async {
     final pdf = pw.Document();
 
@@ -118,8 +116,10 @@ class GetDataViewModel extends GetxController {
       final ttf = pw.Font.ttf(fontData);
 
       // Load ảnh (nếu cần)
-      final imageData = await rootBundle.load(ImageAssest.logoApp); // Ví dụ logo đầu
-      final imageBottomData = await rootBundle.load(ImageAssest.logoApp); // Ví dụ logo cuối
+      final imageData =
+          await rootBundle.load(ImageAssest.logoApp); // Ví dụ logo đầu
+      final imageBottomData =
+          await rootBundle.load(ImageAssest.logoApp); // Ví dụ logo cuối
       final image = pw.MemoryImage(imageData.buffer.asUint8List());
       final image2 = pw.MemoryImage(imageBottomData.buffer.asUint8List());
 
@@ -136,10 +136,12 @@ class GetDataViewModel extends GetxController {
       ];
 
       // Hàm chia dữ liệu thành các phần nhỏ
-      List<List<List<String>>> _paginateData(List<List<String>> data, int rowsPerPage) {
+      List<List<List<String>>> _paginateData(
+          List<List<String>> data, int rowsPerPage) {
         List<List<List<String>>> pages = [];
         for (int i = 1; i < data.length; i += rowsPerPage) {
-          pages.add(data.sublist(i, i + rowsPerPage > data.length ? data.length : i + rowsPerPage));
+          pages.add(data.sublist(i,
+              i + rowsPerPage > data.length ? data.length : i + rowsPerPage));
         }
         return pages;
       }
@@ -155,7 +157,9 @@ class GetDataViewModel extends GetxController {
             build: (pw.Context context) {
               return pw.Column(
                 children: [
-                  if (pageIndex == 0) pw.Image(image, height: 100), // Chỉ hiển thị logo ở trang đầu
+                  if (pageIndex == 0)
+                    pw.Image(image,
+                        height: 100), // Chỉ hiển thị logo ở trang đầu
                   if (pageIndex == 0) pw.SizedBox(height: 20),
                   if (pageIndex == 0)
                     pw.Text(
@@ -168,7 +172,7 @@ class GetDataViewModel extends GetxController {
                     ),
                   if (pageIndex == 0) pw.SizedBox(height: 20),
                   pw.Text(
-                    'Top 10 Câu Hỏi Phổ Biến',
+                    '10 Câu Hỏi Phổ Biến',
                     style: pw.TextStyle(
                       font: ttf,
                       fontSize: 14,
@@ -204,10 +208,12 @@ class GetDataViewModel extends GetxController {
             build: (pw.Context context) {
               return pw.Column(
                 children: [
-                  if (pageIndex == 0) pw.Image(image2, height: 80), // Chỉ hiển thị logo ở trang đầu
+                  if (pageIndex == 0)
+                    pw.Image(image2,
+                        height: 80), // Chỉ hiển thị logo ở trang đầu
                   pw.SizedBox(height: 20),
                   pw.Text(
-                    'Top 10 Tin Nhắn Yêu Thích',
+                    '10 Tin Nhắn Yêu Thích',
                     style: pw.TextStyle(
                       font: ttf,
                       fontSize: 14,
@@ -253,7 +259,8 @@ class GetDataViewModel extends GetxController {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('❌ Nền tảng không hỗ trợ xuất file PDF')),
+          const SnackBar(
+              content: Text('❌ Nền tảng không hỗ trợ xuất file PDF')),
         );
       }
     } catch (e) {
@@ -335,7 +342,7 @@ class GetDataViewModel extends GetxController {
         case "1 Tháng":
           expiryDate = now.add(Duration(days: 30));
           break;
-        case "1 Qúy":
+        case "1 Quý":
           expiryDate = now.add(Duration(days: 90));
           break;
         case "1 Năm":
