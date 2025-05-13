@@ -3,14 +3,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chatmate_web/view/chat_view.dart';
 import 'package:flutter_chatmate_web/view/login_view.dart';
-import 'package:flutter_chatmate_web/view/user_view.dart';
+import 'package:flutter_chatmate_web/view/user_view_screen.dart';
 import 'package:flutter_chatmate_web/view_model/home_view_model.dart';
 import 'package:flutter_chatmate_web/widgets/common/color_extention.dart';
 import 'package:flutter_chatmate_web/widgets/common/image_extention.dart';
 import 'package:get/get.dart';
-
 import '../view_model/get_data_view_model.dart';
-import 'data_export_pdf.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -87,13 +85,21 @@ class _HomeViewState extends State<HomeView>
                     );
                   }
 
+                  // Lấy dữ liệu và đảo thứ tự
                   final historyChat =
-                      snapshot.data!.value as Map<dynamic, dynamic>;
+                      (snapshot.data!.value as Map<dynamic, dynamic>)
+                          .entries
+                          .toList();
+                  historyChat
+                      .sort((a, b) => b.key.compareTo(a.key)); // Đảo thứ tự
+
+                  // Giới hạn 10 tin nhắn
+                  final limitedHistoryChat = historyChat.take(10).toList();
+
                   return ListView.builder(
-                    itemCount: historyChat.length,
+                    itemCount: limitedHistoryChat.length,
                     itemBuilder: (context, index) {
-                      final key = historyChat.keys.elementAt(index);
-                      final chatEntry = historyChat[key];
+                      final chatEntry = limitedHistoryChat[index].value;
                       return ListTile(
                         title: Text(
                           chatEntry['userMessage'] ?? 'Tin nhắn không xác định',
@@ -147,7 +153,7 @@ class _HomeViewState extends State<HomeView>
                 } else if (selectedIndex == 2) {
                   controllerGetData.exportToPDF(context);
                 } else {
-                  Get.to(() => const UserView());
+                  Get.to(() => const UserViewScreen());
                 }
               },
               itemBuilder: (context) {
@@ -168,7 +174,7 @@ class _HomeViewState extends State<HomeView>
                     child: Text(
                       "Thông tin tài khoản",
                       style:
-                      TextStyle(fontSize: 12, color: ChatColor.lightGray),
+                          TextStyle(fontSize: 12, color: ChatColor.lightGray),
                     ),
                   ),
                   PopupMenuItem(
@@ -177,7 +183,7 @@ class _HomeViewState extends State<HomeView>
                     child: Text(
                       "Đăng Xuất",
                       style:
-                      TextStyle(fontSize: 12, color: ChatColor.lightGray),
+                          TextStyle(fontSize: 12, color: ChatColor.lightGray),
                     ),
                   ),
                 ];

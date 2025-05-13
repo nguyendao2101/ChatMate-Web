@@ -1,12 +1,8 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../view_model/user_view_model.dart';
 import '../widgets/common/color_extention.dart';
 import '../widgets/common/image_extention.dart';
-import '../widgets/common_widget/user/favourite_message.dart';
 import 'login_view.dart';
 
 class UserView extends StatefulWidget {
@@ -70,7 +66,7 @@ class _SettingsViewState extends State<UserView> {
                   Get.offAll(() => LoginView());
                 },
                 style:
-                    ElevatedButton.styleFrom(backgroundColor: ChatColor.almond),
+                ElevatedButton.styleFrom(backgroundColor: ChatColor.almond),
                 child: const Text(
                   'Đăng Xuất',
                   textAlign: TextAlign.center,
@@ -88,7 +84,7 @@ class _SettingsViewState extends State<UserView> {
   Widget _buildProfileImage() {
     return Container(
       width:
-          110, // Kích thước tổng thể của hình đại diện (bằng với radius*2 + borderWidth)
+      110, // Kích thước tổng thể của hình đại diện (bằng với radius*2 + borderWidth)
       height: 110,
       // decoration: BoxDecoration(
       //   shape: BoxShape.circle,
@@ -108,37 +104,37 @@ class _SettingsViewState extends State<UserView> {
   Widget _buildUserInfoCard() {
     return controller.userData.isNotEmpty
         ? Card(
-            color: ChatColor.gray1,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildUserInfoRow('Tên', controller.userData['fullName']),
-                  const Divider(color: Colors.white24),
-                  _buildUserInfoRow(
-                      'Email', "  ${controller.userData['email']}"),
-                  const Divider(color: Colors.white24),
-                  _buildUserInfoRow('Địa chỉ', controller.userData['address']),
-                  const Divider(color: Colors.white24),
-                  _buildUserInfoRow('Giới tính', controller.userData['sex']),
-                  const Divider(color: Colors.white24),
-                  _buildUserInfoRow(
-                      'Hạng', controller.userData['ranking'].toString()),
-                  const Divider(color: Colors.white24),
-                  _buildUserInfoRow(
-                      'Ví', '${controller.userData['money'].toString()} coins'),
-                ],
-              ),
-            ),
-          )
+      color: ChatColor.gray1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildUserInfoRow('Tên', controller.userData['fullName']),
+            const Divider(color: Colors.white24),
+            _buildUserInfoRow(
+                'Email', "  ${controller.userData['email']}"),
+            const Divider(color: Colors.white24),
+            _buildUserInfoRow('Địa chỉ', controller.userData['address']),
+            const Divider(color: Colors.white24),
+            _buildUserInfoRow('Giới tính', controller.userData['sex']),
+            const Divider(color: Colors.white24),
+            _buildUserInfoRow(
+                'Hạng', controller.userData['ranking'].toString()),
+            const Divider(color: Colors.white24),
+            _buildUserInfoRow(
+                'Ví', '${controller.userData['money'].toString()} coins'),
+          ],
+        ),
+      ),
+    )
         : const Center(
-            child: CircularProgressIndicator(color: Colors.white),
-          );
+      child: CircularProgressIndicator(color: Colors.white),
+    );
   }
 
   Widget _buildUserInfoRow(String title, String? value) {
